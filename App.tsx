@@ -10,7 +10,7 @@ function App(): React.JSX.Element {
   return (
     <View style={styles.hello}>
       <Text style={styles.helloText}>
-        Hello World
+        Hello World!
       </Text>
     </View>
   );
