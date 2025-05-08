@@ -7,8 +7,8 @@ export const LoginPage: React.FC = () => {
   return (
     <View>
       <Text style={styles.title}>Bem-vindo(a) à Taqtile!</Text>
-      <MainInput title="E-mail" />
-      <MainInput title="Senha" />
+      <MainInput title="E-mail" type="email" />
+      <MainInput title="Senha" type="password" />
       <MainButton title="Entrar" />
     </View>
   );
