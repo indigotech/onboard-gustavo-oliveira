@@ -1,20 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-import MainButton from '../components/MainButton';
-import MainInput from '../components/MainInput';
+import {View, Text, StyleSheet} from 'react-native';
+import {MainButton} from '../components/main-button';
+import {MainInput} from '../components/main-input';
 
-const HomeScreen: React.FC = () => {
+export const LoginPage: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Bem-vindo(a) à Taqtile!</Text>
-      <MainInput title='E-mail'/> 
-      <MainInput title='Senha'/> 
-      <MainButton title="Entrar"/>
+      <MainInput title="E-mail" />
+      <MainInput title="Senha" />
+      <MainButton title="Entrar" />
     </View>
   );
 };
-
-export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {

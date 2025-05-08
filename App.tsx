@@ -1,12 +1,12 @@
 import React from 'react';
-import HomeScreen from './src/pages/LoginPage';
+import {LoginPage} from './src/pages/login-page';
+import {View} from 'react-native';
 
 function App(): React.JSX.Element {
-
   return (
-    <>
-      <HomeScreen/>
-    </>
+    <View>
+      <LoginPage />
+    </View>
   );
 }
 
