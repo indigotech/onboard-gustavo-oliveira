@@ -9,8 +9,12 @@ Antes de começar, é necessário ter as seguintes ferramentas instaladas na sua
 - Android Studio
 - Xcode (somente para desenvolvimento iOS - MacOS)
 - Watchman (para sistemas Mac/Linux)
-  React Native CLI:
-  `bashnpm install -g react-native-cli`
+
+React Native CLI:
+
+```bash
+  npm install -g react-native-cli`
+```
 
 ### Configuração do ambiente
 
@@ -24,8 +28,24 @@ No Xcode, instale os simuladores necessários (caso esteja desenvolvendo para iO
 
 Após clonar o repositório, siga os passos abaixo:
 Instale as dependências:
-`bashnpm install# ouyarn installRode o aplicativo:`
+
+```bash
+npm install
+```
+
+### Rode o aplicativo:
+
 Android:
-`bashnpx react-native run-android`
+
+```bash
+npx react-native run-android
+```
+
 iOS:
-`bashcd iospod installcd ..npx react-native run-ios`
+
+```bash
+cd ios
+pod install
+cd ..
+npx react-native run-ios
+```
