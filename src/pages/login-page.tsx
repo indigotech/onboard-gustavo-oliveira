@@ -16,7 +16,7 @@ export const LoginPage: React.FC = () => {
       return 'Campo obrigatório';
     }
     if (!EMAIL_REGEX.test(text)) {
-      return 'E-mail inválido';
+      return 'E-mail com formato inválido';
     }
     return '';
   };
