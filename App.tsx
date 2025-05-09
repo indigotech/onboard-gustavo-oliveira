@@ -1,12 +1,17 @@
 import React from 'react';
 import {LoginPage} from './src/pages/login-page';
-import {View} from 'react-native';
+import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: 'https://template-onboarding-node-sjz6wnaoia-uc.a.run.app/graphql',
+  cache: new InMemoryCache(),
+});
 
 function App(): React.JSX.Element {
   return (
-    <View>
+    <ApolloProvider client={client}>
       <LoginPage />
-    </View>
+    </ApolloProvider>
   );
 }
 
