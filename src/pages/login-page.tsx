@@ -8,19 +8,24 @@ export const LoginPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d).{7,}$/;
 
   const validateEmail = (text: string) => {
-    if (!text.trim()) return 'Campo obrigatório';
-    const emailRegex = /^[^\s@]+@[^\s@]+\.com$/;
-    if (!emailRegex.test(text))
-      return 'E-mail inválido (deve terminar com .com)';
+    if (!text.trim()) {
+      return 'Campo obrigatório';
+    }
+    if (!EMAIL_REGEX.test(text)) {
+      return 'E-mail inválido';
+    }
     return '';
   };
 
   const validatePassword = (text: string) => {
-    if (!text.trim()) return 'Campo obrigatório';
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{7,}$/;
-    if (!passwordRegex.test(text)) {
+    if (!text.trim()) {
+      return 'Campo obrigatório';
+    }
+    if (!PASSWORD_REGEX.test(text)) {
       return 'A senha deve ter pelo menos 7 caracteres, com letras e números';
     }
     return '';
