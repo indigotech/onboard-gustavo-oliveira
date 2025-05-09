@@ -2,14 +2,29 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Alert} from 'react-native';
 import {MainButton} from '../components/main-button';
 import {MainInput} from '../components/main-input';
+import {gql, useMutation} from '@apollo/client';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const LoginPage: React.FC = () => {
+const LOGIN_MUTATION = gql`
+  mutation Login($data: LoginInput!) {
+    login(data: $data) {
+      user {
+        name
+        email
+      }
+      token
+    }
+  }
+`;
+
+export const LoginPage: React.FC<{navigation: any}> = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d).{7,}$/;
+  const [login] = useMutation(LOGIN_MUTATION);
 
   const validateEmail = (text: string) => {
     if (!text.trim()) {
@@ -31,7 +46,7 @@ export const LoginPage: React.FC = () => {
     return '';
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const emailValidation = validateEmail(email);
     const passwordValidation = validatePassword(password);
 
@@ -39,7 +54,20 @@ export const LoginPage: React.FC = () => {
     setPasswordError(passwordValidation);
 
     if (!emailValidation && !passwordValidation) {
-      Alert.alert('Login válido!', 'Tudo certo para continuar.');
+      try {
+        const {data} = await login({
+          variables: {
+            data: {email, password},
+          },
+        });
+
+        if (data?.login?.token) {
+          await AsyncStorage.setItem('authToken', data.login.token);
+          navigation.navigate('Home');
+        }
+      } catch (error: any) {
+        Alert.alert('Erro', error.message || 'Ocorreu um erro');
+      }
     }
   };
 
