@@ -1,10 +1,18 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Button} from 'react-native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../types/navigation';
 
-export const HomePage: React.FC<{navigation: any}> = () => {
+type HomePageProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+export const HomePage: React.FC<HomePageProps> = ({navigation}) => {
   return (
     <View>
       <Text style={styles.title}>Home</Text>
+      <Button
+        title="Voltar para Login!"
+        onPress={() => navigation.navigate('Login')}
+      />
     </View>
   );
 };
