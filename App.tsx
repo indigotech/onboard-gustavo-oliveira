@@ -5,6 +5,7 @@ import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 import {LoginPage} from './src/pages/login-page';
 import {HomePage} from './src/pages/home-page';
 import {RootStackParamList} from './src/types/navigation';
+import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 
 const client = new ApolloClient({
   uri: 'https://template-onboarding-node-sjz6wnaoia-uc.a.run.app/graphql',
