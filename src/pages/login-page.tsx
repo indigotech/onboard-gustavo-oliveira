@@ -4,6 +4,7 @@ import {MainButton} from '../components/main-button';
 import {MainInput} from '../components/main-input';
 import {gql, useMutation} from '@apollo/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {LoadingModal} from '../components/loading-modal';
 
 const LOGIN_MUTATION = gql`
   mutation Login($data: LoginInput!) {
@@ -24,6 +25,8 @@ export const LoginPage: React.FC<{navigation: any}> = ({navigation}) => {
   const [passwordError, setPasswordError] = useState('');
   const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d).{7,}$/;
+  const [loading, setLoading] = useState(false);
+
   const [login] = useMutation(LOGIN_MUTATION);
 
   const validateEmail = (text: string) => {
@@ -54,6 +57,7 @@ export const LoginPage: React.FC<{navigation: any}> = ({navigation}) => {
     setPasswordError(passwordValidation);
 
     if (!emailValidation && !passwordValidation) {
+      setLoading(true);
       try {
         const {data} = await login({
           variables: {
@@ -67,6 +71,8 @@ export const LoginPage: React.FC<{navigation: any}> = ({navigation}) => {
         }
       } catch (error: any) {
         Alert.alert('Erro', error.message || 'Ocorreu um erro');
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -88,7 +94,8 @@ export const LoginPage: React.FC<{navigation: any}> = ({navigation}) => {
         onChange={setPassword}
         error={passwordError}
       />
-      <MainButton title="Entrar" onPress={handleSubmit} />
+      <MainButton title="Entrar" onPress={handleSubmit} disabled={loading} />
+      <LoadingModal visible={loading} />
     </View>
   );
 };
