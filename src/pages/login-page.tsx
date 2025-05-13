@@ -2,25 +2,16 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {LoginForm} from '../components/login-form';
 import {LoadingModal} from '../components/loading-modal';
-import {useLoginForm} from '../hooks/use-loginForm';
-import {useLogin} from '../hooks/use-login';
+import {useLoginForm} from '../hooks/login-form.hook';
+import {useLogin} from '../hooks/login.hook';
 
 export const LoginPage: React.FC = () => {
-  const {
-    email,
-    setEmail,
-    password,
-    setPassword,
-    emailError,
-    passwordError,
-    validateFields,
-  } = useLoginForm();
-
+  const loginForm = useLoginForm();
   const {login, loading} = useLogin();
 
   const handleSubmit = () => {
-    if (validateFields()) {
-      login(email, password);
+    if (loginForm.validateFields()) {
+      login(loginForm.email, loginForm.password);
     }
   };
 
@@ -28,12 +19,12 @@ export const LoginPage: React.FC = () => {
     <View>
       <Text style={styles.title}>Bem-vindo(a) à Taqtile!</Text>
       <LoginForm
-        email={email}
-        setEmail={setEmail}
-        password={password}
-        setPassword={setPassword}
-        emailError={emailError}
-        passwordError={passwordError}
+        email={loginForm.email}
+        setEmail={loginForm.setEmail}
+        password={loginForm.password}
+        setPassword={loginForm.setPassword}
+        emailError={loginForm.emailError}
+        passwordError={loginForm.passwordError}
         onSubmit={handleSubmit}
         disabled={loading}
       />
