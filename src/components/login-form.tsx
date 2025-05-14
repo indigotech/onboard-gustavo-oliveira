@@ -1,29 +1,52 @@
-import {useState} from 'react';
-import {validateEmail, validatePassword} from '../hooks/validations.hook';
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
+import {MainInput} from './main-input';
+import {MainButton} from './main-button';
 
-export const useLoginForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+interface LoginFormProps {
+  email: string;
+  setEmail: (value: string) => void;
+  password: string;
+  setPassword: (value: string) => void;
+  emailError: string;
+  passwordError: string;
+  onSubmit: () => void;
+  disabled: boolean;
+}
 
-  const validateFields = () => {
-    const emailValidation = validateEmail(email);
-    const passwordValidation = validatePassword(password);
-
-    setEmailError(emailValidation);
-    setPasswordError(passwordValidation);
-
-    return !emailValidation && !passwordValidation;
-  };
-
-  return {
-    email,
-    setEmail,
-    password,
-    setPassword,
-    emailError,
-    passwordError,
-    validateFields,
-  };
+export const LoginForm: React.FC<LoginFormProps> = ({
+  email,
+  setEmail,
+  password,
+  setPassword,
+  emailError,
+  passwordError,
+  onSubmit,
+  disabled,
+}) => {
+  return (
+    <View style={styles.container}>
+      <MainInput
+        title="E-mail"
+        type="email"
+        value={email}
+        onChange={setEmail}
+        error={emailError}
+      />
+      <MainInput
+        title="Senha"
+        type="password"
+        value={password}
+        onChange={setPassword}
+        error={passwordError}
+      />
+      <MainButton title="Entrar" onPress={onSubmit} disabled={disabled} />
+    </View>
+  );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+  },
+});

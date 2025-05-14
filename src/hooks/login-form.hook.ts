@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {validateEmail, validatePassword} from '../hooks/validations.hook';
+import {validateEmail, validatePassword} from '../utils/validation-utils';
 
 export const useLoginForm = () => {
   const [email, setEmail] = useState('');

@@ -1,34 +1,69 @@
 import React from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import {
+  Text,
+  FlatList,
+  ActivityIndicator,
+  StyleSheet,
+  View,
+} from 'react-native';
+import {UserCard} from './user-card';
+import {useUserList} from '../hooks/user-list.hook';
+import {LoadingModal} from './loading-modal';
 
-const mockUsers = [
-  {id: '1', name: 'Maria Silva', email: 'maria@exemplo.com'},
-  {id: '2', name: 'João Souza', email: 'joao@exemplo.com'},
-  {id: '3', name: 'Ana Lima', email: 'ana@exemplo.com'},
-];
+export const UserList: React.FC = () => {
+  const {users, loading, error, isFetchingMore, loadMoreUsers} = useUserList();
 
-export const UserList: React.FC<{}> = () => {
+  if (loading && users.length === 0) {
+    return <LoadingModal visible={loading} />;
+  }
+
+  if (error) {
+    console.error('Erro ao carregar usuários:', error.message);
+    return (
+      <View style={styles.center}>
+        <Text>Erro ao carregar usuários: {error.message}</Text>
+      </View>
+    );
+  }
+
+  if (users.length === 0) {
+    return (
+      <View style={styles.center}>
+        <Text>Nenhum usuário encontrado.</Text>
+      </View>
+    );
+  }
+
   return (
-    <View>
-      <Text style={styles.title}>Lista de Usuários</Text>
-      <FlatList
-        data={mockUsers}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <View>
-            <Text>
-              {item.name} - {item.email}
-            </Text>
-          </View>
-        )}
-      />
-    </View>
+    <FlatList
+      data={users}
+      keyExtractor={item => item.id}
+      renderItem={({item}) => <UserCard name={item.name} email={item.email} />}
+      onEndReached={loadMoreUsers}
+      onEndReachedThreshold={0.5}
+      ListFooterComponent={
+        isFetchingMore ? (
+          <ActivityIndicator
+            style={styles.loading}
+            size="small"
+            color="#0000ff"
+          />
+        ) : null
+      }
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 24,
-    marginVertical: 20,
+  container: {
+    flex: 1,
+  },
+  loading: {
+    marginVertical: 16,
+  },
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

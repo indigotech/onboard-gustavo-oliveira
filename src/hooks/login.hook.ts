@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {Alert} from 'react-native';
 import {useState} from 'react';
-import {RootStackParamList} from '../navigation';
+import {RootStackParamList} from '../types/navigation';
 
 const LOGIN_MUTATION = gql`
   mutation Login($data: LoginInput!) {
@@ -20,7 +20,6 @@ const LOGIN_MUTATION = gql`
 export const useLogin = () => {
   const [loginMutation] = useMutation(LOGIN_MUTATION);
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-
   const [loading, setLoading] = useState(false);
 
   const login = async (email: string, password: string) => {
@@ -32,7 +31,7 @@ export const useLogin = () => {
 
       if (data?.login?.token) {
         await AsyncStorage.setItem('authToken', data.login.token);
-        navigation.navigate('Home'); // Certifique-se de que 'Home' está definido no RootStackParamList
+        navigation.navigate('Home');
       }
     } catch (error: any) {
       Alert.alert('Erro', error.message || 'Ocorreu um erro');
