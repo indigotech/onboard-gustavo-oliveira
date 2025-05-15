@@ -18,7 +18,6 @@ export const UserList: React.FC = () => {
   }
 
   if (error) {
-    console.error('Erro ao carregar usuários:', error.message);
     return (
       <View style={styles.center}>
         <Text>Erro ao carregar usuários: {error.message}</Text>

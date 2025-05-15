@@ -11,14 +11,14 @@ export const UserPage: React.FC = () => {
 
   const handleSubmit = () => {
     if (userForm.validateFields()) {
-      createUser(
-        userForm.name,
-        userForm.email,
-        userForm.phone,
-        userForm.birthDate,
-        userForm.role,
-        userForm.password,
-      );
+      createUser({
+        name: userForm.name,
+        email: userForm.email,
+        phone: userForm.phone,
+        birthDate: userForm.birthDate,
+        role: userForm.role,
+        password: userForm.password,
+      });
     }
   };
 

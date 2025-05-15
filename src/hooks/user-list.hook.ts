@@ -27,9 +27,6 @@ export const useUserList = (limit = 20) => {
   const [offset, setOffset] = useState(0);
   const [users, setUsers] = useState<User[]>([]);
 
-  console.log(JSON.stringify(users));
-  console.log('--------------------');
-
   const {loading, error, data} = useQuery(GET_USERS, {
     variables: {data: {offset, limit}},
     notifyOnNetworkStatusChange: true,
@@ -44,13 +41,9 @@ export const useUserList = (limit = 20) => {
 
   const loadMoreUsers = async () => {
     if (!data?.users.pageInfo.hasNextPage) {
-      console.info(
-        'Nenhum usuário adicional para carregar ou já está carregando.',
-      );
       return;
     }
 
-    console.info('Carregando mais usuários...');
     setOffset(offset + limit);
   };
 

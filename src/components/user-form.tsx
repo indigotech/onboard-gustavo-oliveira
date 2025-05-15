@@ -2,6 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {MainInput} from './main-input';
 import {MainButton} from './main-button';
+import {MainPicker} from './main-picker';
 
 interface UserFormProps {
   name: string;
@@ -26,82 +27,64 @@ interface UserFormProps {
   disabled: boolean;
 }
 
-export const UserForm: React.FC<UserFormProps> = ({
-  name,
-  setName,
-  email,
-  setEmail,
-  phone,
-  setPhone,
-  birthDate,
-  setBirthDate,
-  role,
-  setRole,
-  password,
-  setPassword,
-  nameError,
-  emailError,
-  phoneError,
-  birthDateError,
-  roleError,
-  passwordError,
-  onSubmit,
-  disabled,
-}) => {
+export const UserForm: React.FC<UserFormProps> = props => {
   return (
     <View style={styles.container}>
       <MainInput
         title="Nome"
         type="default"
         placeholder="Digite seu nome"
-        value={name}
-        onChange={setName}
-        error={nameError}
+        value={props.name}
+        onChange={props.setName}
+        error={props.nameError}
       />
       <MainInput
         title="E-mail"
         type="email-address"
         placeholder="Digite seu e-mail"
-        value={email}
-        onChange={setEmail}
-        error={emailError}
+        value={props.email}
+        onChange={props.setEmail}
+        error={props.emailError}
       />
       <MainInput
         title="Telefone"
         type="numeric"
         placeholder="Digite seu telefone"
-        value={phone}
-        onChange={setPhone}
-        error={phoneError}
+        value={props.phone}
+        onChange={props.setPhone}
+        error={props.phoneError}
       />
       <MainInput
         title="Data de Nascimento"
         type="default"
         placeholder="DD/MM/AAAA"
-        value={birthDate}
-        onChange={setBirthDate}
-        error={birthDateError}
+        value={props.birthDate}
+        onChange={props.setBirthDate}
+        error={props.birthDateError}
       />
-      <MainInput
-        title="Função"
-        type="default"
-        placeholder="admin ou user"
-        value={role}
-        onChange={setRole}
-        error={roleError}
+      <MainPicker
+        placeholder="selecione um papel"
+        title="Role"
+        selectedValue={props.role}
+        onValueChange={props.setRole}
+        options={[
+          {label: 'Admin', value: 'admin'},
+          {label: 'User', value: 'user'},
+        ]}
+        error={props.roleError}
       />
       <MainInput
         title="Senha"
         type="password"
         placeholder="Digite sua senha"
-        value={password}
-        onChange={setPassword}
-        error={passwordError}
+        value={props.password}
+        onChange={props.setPassword}
+        error={props.passwordError}
       />
       <MainButton
         title="Adicionar Usuário"
-        onPress={onSubmit}
-        disabled={disabled}
+        onPress={props.onSubmit}
+        disabled={props.disabled}
       />
     </View>
   );
