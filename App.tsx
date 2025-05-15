@@ -1,16 +1,38 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
+import {setContext} from '@apollo/client/link/context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {LoginPage} from './src/pages/login-page';
 import {HomePage} from './src/pages/home-page';
+import {RootStackParamList} from './src/types/navigation';
+
+const httpLink = createHttpLink({
+  uri: 'https://template-onboarding-node-sjz6wnaoia-uc.a.run.app/graphql',
+});
+
+const authLink = setContext(async (_, {headers}) => {
+  const token = await AsyncStorage.getItem('authToken');
+  return {
+    headers: {
+      ...headers,
+      Authorization: token ? token : '',
+    },
+  };
+});
 
 const client = new ApolloClient({
-  uri: 'https://template-onboarding-node-sjz6wnaoia-uc.a.run.app/graphql',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): React.JSX.Element {
   return (
