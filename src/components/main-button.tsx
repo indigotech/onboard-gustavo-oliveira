@@ -8,15 +8,6 @@ interface MainButtonProps {
   disabled?: boolean;
 }
 
-<<<<<<< HEAD
-export const MainButton: React.FC<MainButtonProps> = props => {
-  const {title, onPress, disabled} = props;
-
-  return (
-    <View>
-      <Button title={title} onPress={onPress} disabled={disabled} />
-    </View>
-=======
 export const MainButton: React.FC<MainButtonProps> = ({
   title,
   onPress,
@@ -29,7 +20,6 @@ export const MainButton: React.FC<MainButtonProps> = ({
       disabled={disabled}>
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
->>>>>>> 011123e (Loading when submit)
   );
 };
 

@@ -12,6 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {LoginPage} from './src/pages/login-page';
 import {HomePage} from './src/pages/home-page';
 import {RootStackParamList} from './src/types/navigation';
+import {UserPage} from './src/pages/user-page';
 
 const httpLink = createHttpLink({
   uri: 'https://template-onboarding-node-sjz6wnaoia-uc.a.run.app/graphql',
@@ -41,6 +42,7 @@ function App(): React.JSX.Element {
         <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Login" component={LoginPage} />
           <Stack.Screen name="Home" component={HomePage} />
+          <Stack.Screen name="User" component={UserPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>

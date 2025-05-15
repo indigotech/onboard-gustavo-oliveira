@@ -11,7 +11,7 @@ import {useUserList} from '../hooks/user-list.hook';
 import {LoadingModal} from './loading-modal';
 
 export const UserList: React.FC = () => {
-  const {users, loading, error, isFetchingMore, loadMoreUsers} = useUserList();
+  const {users, loading, error, loadMoreUsers} = useUserList();
 
   if (loading && users.length === 0) {
     return <LoadingModal visible={loading} />;
@@ -42,7 +42,7 @@ export const UserList: React.FC = () => {
       onEndReached={loadMoreUsers}
       onEndReachedThreshold={0.5}
       ListFooterComponent={
-        isFetchingMore ? (
+        loading ? (
           <ActivityIndicator
             style={styles.loading}
             size="small"

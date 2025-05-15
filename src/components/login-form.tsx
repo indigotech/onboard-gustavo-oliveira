@@ -28,7 +28,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
     <View style={styles.container}>
       <MainInput
         title="E-mail"
-        type="email"
+        type="email-address"
         value={email}
         onChange={setEmail}
         error={emailError}
