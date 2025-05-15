@@ -17,11 +17,11 @@ const GET_USERS = gql`
   }
 `;
 
-type User = {
+interface User {
   id: string;
   name: string;
   email: string;
-};
+}
 
 export const useUserList = (limit = 20) => {
   const [offset, setOffset] = useState(0);
