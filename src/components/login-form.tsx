@@ -14,33 +14,28 @@ interface LoginFormProps {
   disabled: boolean;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({
-  email,
-  setEmail,
-  password,
-  setPassword,
-  emailError,
-  passwordError,
-  onSubmit,
-  disabled,
-}) => {
+export const LoginForm: React.FC<LoginFormProps> = props => {
   return (
     <View style={styles.container}>
       <MainInput
         title="E-mail"
         type="email-address"
-        value={email}
-        onChange={setEmail}
-        error={emailError}
+        value={props.email}
+        onChange={props.setEmail}
+        error={props.emailError}
       />
       <MainInput
         title="Senha"
         type="password"
-        value={password}
-        onChange={setPassword}
-        error={passwordError}
+        value={props.password}
+        onChange={props.setPassword}
+        error={props.passwordError}
       />
-      <MainButton title="Entrar" onPress={onSubmit} disabled={disabled} />
+      <MainButton
+        title="Entrar"
+        onPress={props.onSubmit}
+        disabled={props.disabled}
+      />
     </View>
   );
 };
