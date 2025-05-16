@@ -1,17 +1,29 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {NavigationProp} from '@react-navigation/native';
+import {RootStackParamList} from '../types/navigation';
 
 interface UserCardProps {
   name: string;
   email: string;
+  id: string;
 }
 
-export const UserCard: React.FC<UserCardProps> = ({name, email}) => {
+export const UserCard: React.FC<UserCardProps> = ({name, email, id}) => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
+  const handlePress = () => {
+    navigation.navigate('UserDetails', {id});
+  };
+
   return (
-    <View style={styles.userItem}>
-      <Text style={styles.userName}>{name}</Text>
-      <Text style={styles.userEmail}>{email}</Text>
-    </View>
+    <TouchableOpacity onPress={handlePress}>
+      <View style={styles.userItem}>
+        <Text style={styles.userName}>{name}</Text>
+        <Text style={styles.userEmail}>{email}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 

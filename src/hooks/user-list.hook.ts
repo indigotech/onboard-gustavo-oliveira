@@ -1,21 +1,6 @@
 import {useState} from 'react';
-import {useQuery, gql} from '@apollo/client';
-
-export const GET_USERS = gql`
-  query GetUsers($data: PageInput!) {
-    users(data: $data) {
-      nodes {
-        id
-        name
-        email
-      }
-      count
-      pageInfo {
-        hasNextPage
-      }
-    }
-  }
-`;
+import {useQuery} from '@apollo/client';
+import {GET_USERS} from './gql.hook';
 
 interface User {
   id: string;
