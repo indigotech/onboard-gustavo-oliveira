@@ -3,8 +3,9 @@ import {TextInput, Text, View, StyleSheet} from 'react-native';
 
 interface MainInputProps {
   title: string;
-  type: 'email' | 'password';
+  type: 'email-address' | 'password' | 'numeric' | 'default';
   value: string;
+  placeholder?: string;
   error: string;
   onChange: (text: string) => void;
 }
@@ -13,6 +14,7 @@ export const MainInput: React.FC<MainInputProps> = ({
   title,
   type,
   value,
+  placeholder,
   error,
   onChange,
 }) => {
@@ -23,9 +25,10 @@ export const MainInput: React.FC<MainInputProps> = ({
         value={value}
         onChangeText={onChange}
         secureTextEntry={type === 'password'}
-        keyboardType={type === 'email' ? 'email-address' : 'default'}
+        keyboardType={type === 'password' ? 'default' : type}
         style={[styles.input, error ? styles.inputError : null]}
         autoCapitalize="none"
+        placeholder={placeholder}
       />
       {error !== '' && <Text style={styles.error}>{error}</Text>}
     </View>

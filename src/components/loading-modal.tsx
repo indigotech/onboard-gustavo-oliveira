@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, ActivityIndicator, View, StyleSheet} from 'react-native';
+import {Modal, View, ActivityIndicator, StyleSheet} from 'react-native';
 
 interface LoadingModalProps {
   visible: boolean;
@@ -7,19 +7,19 @@ interface LoadingModalProps {
 
 export const LoadingModal: React.FC<LoadingModalProps> = ({visible}) => {
   return (
-    <Modal transparent visible={visible}>
-      <View style={styles.container}>
-        <ActivityIndicator size="large" color="#0000ff" />
+    <Modal transparent visible={visible} animationType="fade">
+      <View style={styles.overlay}>
+        <ActivityIndicator size="large" color="#fff" />
       </View>
     </Modal>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  overlay: {
     flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 });

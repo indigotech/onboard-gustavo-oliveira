@@ -1,9 +1,10 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View} from 'react-native';
 import {LoginForm} from '../components/login-form';
 import {LoadingModal} from '../components/loading-modal';
 import {useLoginForm} from '../hooks/login-form.hook';
 import {useLogin} from '../hooks/login.hook';
+import {PageTitle} from '../components/page-title';
 
 export const LoginPage: React.FC = () => {
   const loginForm = useLoginForm();
@@ -17,7 +18,7 @@ export const LoginPage: React.FC = () => {
 
   return (
     <View>
-      <Text style={styles.title}>Bem-vindo(a) à Taqtile!</Text>
+      <PageTitle title="Bem-vindo(a) à Taqtile!" />
       <LoginForm
         email={loginForm.email}
         setEmail={loginForm.setEmail}
@@ -32,10 +33,3 @@ export const LoginPage: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 24,
-    marginVertical: 20,
-  },
-});
