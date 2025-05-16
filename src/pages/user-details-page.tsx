@@ -1,17 +1,25 @@
 import React from 'react';
-import {View, Text, StyleSheet, ActivityIndicator, Alert} from 'react-native';
+import {View, Text, StyleSheet, Alert} from 'react-native';
 import {useUserDetails} from '../hooks/user-details.hook';
+import {RouteProp} from '@react-navigation/native';
+import {RootStackParamList} from '../types/navigation';
+import {LoadingModal} from '../components/loading-modal';
 
-export const UserDetailsPage: React.FC<{route: any}> = ({route}) => {
+interface UserDetailsRouteProp
+  extends RouteProp<RootStackParamList, 'UserDetails'> {
+  params: {
+    id: string;
+  };
+}
+
+export const UserDetailsPage: React.FC<{route: UserDetailsRouteProp}> = ({
+  route,
+}) => {
   const {id} = route.params;
-  const {user, loading, error} = useUserDetails(id);
+  const {user, loading, error} = useUserDetails(Number(id));
 
   if (loading) {
-    return (
-      <View style={styles.center}>
-        <ActivityIndicator size="large" color="#0000ff" />
-      </View>
-    );
+    return <LoadingModal visible={loading} />;
   }
 
   if (error) {

@@ -73,3 +73,10 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+
+Podfile.lock
+project.pbxproj
+contents.xcworkspacedata
+package-lock.json
+ios/hw.xcodeproj/project.pbxproj
