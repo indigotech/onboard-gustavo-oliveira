@@ -32,7 +32,7 @@ export const useCreateUser = () => {
 
   const createUser = async (user: User) => {
     try {
-      const {birthDate, ...rest} = user;
+      const {birthDate, ...userWithoutBirthDate} = user;
 
       const [day, month, year] = birthDate.split('/');
       const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(
@@ -41,7 +41,7 @@ export const useCreateUser = () => {
 
       const {data} = await createUserMutation({
         variables: {
-          data: {...rest, birthDate: formattedDate},
+          data: {...userWithoutBirthDate, birthDate: formattedDate},
         },
       });
 
