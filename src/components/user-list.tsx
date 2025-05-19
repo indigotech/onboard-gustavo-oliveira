@@ -37,7 +37,9 @@ export const UserList: React.FC = () => {
     <FlatList
       data={users}
       keyExtractor={item => item.id}
-      renderItem={({item}) => <UserCard name={item.name} email={item.email} />}
+      renderItem={({item}) => (
+        <UserCard name={item.name} email={item.email} id={item.id} />
+      )}
       onEndReached={loadMoreUsers}
       onEndReachedThreshold={0.5}
       ListFooterComponent={

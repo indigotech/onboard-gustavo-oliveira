@@ -1,21 +1,10 @@
-import {useMutation, gql} from '@apollo/client';
+import {useMutation} from '@apollo/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {Alert} from 'react-native';
 import {useState} from 'react';
 import {RootStackParamList} from '../types/navigation';
-
-const LOGIN_MUTATION = gql`
-  mutation Login($data: LoginInput!) {
-    login(data: $data) {
-      user {
-        name
-        email
-      }
-      token
-    }
-  }
-`;
+import {LOGIN_MUTATION} from './gql.hook';
 
 export const useLogin = () => {
   const [loginMutation] = useMutation(LOGIN_MUTATION);
