@@ -16,7 +16,9 @@ export const PageTitle: React.FC<PageTitleProps> = ({title}) => {
 const styles = StyleSheet.create({
   title: {
     fontSize: 24,
+    fontWeight: 'bold',
     marginVertical: 20,
+    color: '#000',
   },
   titleContainer: {
     justifyContent: 'center',

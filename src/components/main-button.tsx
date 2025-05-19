@@ -25,6 +25,7 @@ export const MainButton: React.FC<MainButtonProps> = ({
 const styles = StyleSheet.create({
   button: {
     backgroundColor: '#007AFF',
+    height: 44,
     paddingVertical: 12,
     paddingHorizontal: 24,
     marginTop: 16,
@@ -34,8 +35,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#A9A9A9',
   },
   buttonText: {
-    color: '#FFFFFF',
     fontSize: 16,
+    fontWeight: 'regular',
+    color: '#FFFFFF',
     textAlign: 'center',
   },
 });
