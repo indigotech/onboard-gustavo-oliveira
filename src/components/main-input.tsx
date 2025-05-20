@@ -40,13 +40,14 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   label: {
-    marginBottom: 6,
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 12,
+    fontWeight: 'regular',
+    color: '#777',
+    marginBottom: 12,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#777',
     borderRadius: 6,
     padding: 10,
     fontSize: 16,
@@ -56,7 +57,8 @@ const styles = StyleSheet.create({
   },
   error: {
     color: 'red',
-    marginTop: 4,
-    fontSize: 14,
+    fontWeight: 'regular',
+    marginTop: 8,
+    fontSize: 12,
   },
 });
